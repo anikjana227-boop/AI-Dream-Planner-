@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dream Planner — when you'll actually afford it</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ===================== LEFT: INPUT PANEL ===================== -->
+  <aside class="panel-input">
+    <header class="brand">
+      <div class="brand-mark" aria-hidden="true"></div>
+      <div>
+        <h1>Dream Planner</h1>
+        <p class="brand-sub">Tell it your numbers. It tells you the date.</p>
+      </div>
+    </header>
+
+    <form id="plan-form" novalidate>
+
+      <section class="field-group">
+        <h2>Your money, monthly</h2>
+
+        <label class="field">
+          <span>Take-home salary</span>
+          <div class="input-rupee">
+            <span class="rupee">₹</span>
+            <input type="number" id="salary" name="salary" min="0" step="1000" placeholder="80,000" required>
+          </div>
+        </label>
+
+        <label class="field">
+          <span>Average expenses</span>
+          <div class="input-rupee">
+            <span class="rupee">₹</span>
+            <input type="number" id="expenses" name="expenses" min="0" step="1000" placeholder="45,000" required>
+          </div>
+        </label>
+
+        <label class="field">
+          <span>Current savings</span>
+          <div class="input-rupee">
+            <span class="rupee">₹</span>
+            <input type="number" id="savings" name="savings" min="0" step="1000" placeholder="3,00,000" required>
+          </div>
+        </label>
+
+        <label class="field">
+          <span>Assumed annual return</span>
+          <div class="input-rupee input-percent">
+            <input type="number" id="return-pct" name="return_pct" min="0" max="30" step="0.5" placeholder="6" required>
+            <span class="rupee">%</span>
+          </div>
+        </label>
+      </section>
+
+      <section class="field-group">
+        <div class="field-group-head">
+          <h2>Your dream goals</h2>
+          <button type="button" id="add-goal" class="btn-ghost">+ Add a goal</button>
+        </div>
+        <p class="hint">A car, a flat, a plot of land — whatever you're saving toward.</p>
+
+        <div id="goal-list"></div>
+      </section>
+
+      <button type="submit" id="submit-btn" class="btn-primary">
+        <span class="btn-label">Plan my dreams</span>
+        <span class="btn-spinner" hidden></span>
+      </button>
+
+      <button type="button" id="demo-btn" class="btn-text">Just show me a demo</button>
+    </form>
+  </aside>
+
+  <!-- ===================== RIGHT: RESULTS ===================== -->
+  <main class="panel-results">
+
+    <div id="empty-state" class="empty-state">
+      <svg class="empty-glyph" viewBox="0 0 200 120" aria-hidden="true">
+        <line x1="0" y1="100" x2="200" y2="100" stroke="var(--line-soft)" stroke-width="1"/>
+        <path d="M0,90 Q50,70 90,55 T200,10" fill="none" stroke="var(--gold)" stroke-width="1.5" stroke-dasharray="2 4"/>
+        <circle cx="200" cy="10" r="3" fill="var(--gold)"/>
+      </svg>
+      <p>Fill in your numbers on the left. Your path to each goal will chart itself here.</p>
+    </div>
+
+    <div id="results" class="results" hidden>
+
+      <section class="summary-strip" id="summary-strip" aria-label="Monthly snapshot"></section>
+
+      <section class="horizon-section">
+        <div class="horizon-head">
+          <h2>Your path to each dream</h2>
+          <p>Each point marks the month a goal becomes yours.</p>
+        </div>
+        <div class="horizon-chart-wrap">
+          <svg id="horizon-chart" viewBox="0 0 900 340" preserveAspectRatio="xMidYMid meet"></svg>
+        </div>
+      </section>
+
+      <section class="goal-cards" id="goal-cards" aria-label="Goal details"></section>
+
+    </div>
+
+    <div id="error-state" class="error-state" hidden>
+      <p id="error-text"></p>
+    </div>
+
+  </main>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
